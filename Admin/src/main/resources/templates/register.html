@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="~{fragments::head}"></head>
+<body>
+<!-- Content -->
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <!-- Register -->
+            <div class="card">
+                <div class="card-body">
+                    <div th:replace="~{fragments::logo}"></div>
+                    <h4 class="mb-2">Welcome to Project! 👋</h4>
+                    <p class="mb-4">Please sign in to your account and start the adventure</p>
+
+                    <div class="alert alert-danger alert-dismissible" role="alert" th:if="${errorMessage}" th:text="${errorMessage}">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible" role="alert" th:if="${successMessage}" th:text="${successMessage}">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <form class="mb-3" th:action="${register}" th:object="${adminDto}" method="POST">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="firstName"
+                                    th:field="*{firstName}"
+                                    placeholder="Enter your first name"
+                                    autofocus
+                            />
+                            <p style="color: red;font-style: italic" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="lastName"
+                                    th:field="*{lastName}"
+                                    placeholder="Enter your last name"
+                            />
+                            <p style="color: red;font-style: italic" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Email or Username</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="username"
+                                    th:field="*{username}"
+                                    placeholder="Enter your email or username"
+                            />
+                            <p style="color: red;font-style: italic" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                        </div>
+                        <div class="mb-3 form-password-toggle">
+                            <label class="form-label" for="password">Password</label>
+                            <div class="input-group input-group-merge">
+                                <input
+                                        type="password"
+                                        id="password"
+                                        class="form-control"
+                                        th:field="*{password}"
+                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        aria-describedby="password"
+                                />
+                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            </div>
+                            <p style="color: red;font-style: italic" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                        </div>
+                        <div class="mb-3 form-password-toggle">
+                            <label class="form-label" for="repest-password">Repest password</label>
+                            <div class="input-group input-group-merge">
+                                <input
+                                        type="password"
+                                        id="repest-password"
+                                        class="form-control"
+                                        th:field="*{repeatPassword}"
+                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        aria-describedby="password"
+                                />
+                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary d-grid w-100" type="submit">Sign up</button>
+                        </div>
+                    </form>
+
+                    <p class="text-center">
+                        <span>Already have an account?</span>
+                        <a th:href="@{/login}">
+                            <span>Sign in instead</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <!-- /Register -->
+        </div>
+    </div>
+</div>
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
+<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
+<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
+<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+<script th:src="@{/assets/vendor/js/menu.js}"></script>
+<!-- endbuild -->
+<!-- Main JS -->
+<script th:src="@{/assets/js/main.js}"></script>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
