@@ -8,6 +8,7 @@ import com.hieuduy.core.utils.ImageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -23,7 +24,12 @@ public class PageController {
     }
 
     @GetMapping(value = {"/", "/index", "/home"})
-    public String goHome(Model model) {
+    public String goHome() {
+        return "redirect:/products";
+    }
+
+    @GetMapping("/products")
+    public String goProductsPage(Model model){
 
         List<Product> products = productService.findAll();
         List<Category> categories = categoryService.findAll();
@@ -35,4 +41,22 @@ public class PageController {
 
         return "index";
     }
+
+    @GetMapping("/product/{productId}")
+    public String goProductDetailPage(Model model, @PathVariable Long productId){
+
+        Product product = productService.findById(productId);
+        List<Category> categories = categoryService.findAll();
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("title", "Product detail");
+        model.addAttribute("product", product);
+        model.addAttribute("imgUtil", new ImageUtil());
+
+        return "product-detail";
+    }
+
+
+
+
 }

@@ -40,7 +40,7 @@ public class CustomerSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authenticationManager(authenticationManager)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/*").permitAll()
+                        .requestMatchers("/**").permitAll()
                 )
                 .formLogin(login -> login
                         .loginPage("/login")

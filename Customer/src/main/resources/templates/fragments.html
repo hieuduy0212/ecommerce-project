@@ -131,18 +131,8 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li  th:classappend="${title == 'Home page'} ? 'active' : ''"><a th:href="@{/home}">Home</a></li>
+                            <li th:if="${title == 'Product detail'}"  th:classappend="${title == 'Product detail'} ? 'active' : ''"><a href="#">Detail</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -177,17 +167,9 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <li th:each="category : ${categories}">
+                                <a href="#" th:text="${category.name}">Fresh Meat</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -219,14 +201,14 @@
 
 <th:block th:fragment="js">
     <!-- Js Plugins -->
-    <script th:src="@{js/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{js/bootstrap.min.js}"></script>
-    <script th:src="@{js/jquery.nice-select.min.js}"></script>
-    <script th:src="@{js/jquery-ui.min.js}"></script>
-    <script th:src="@{js/jquery.slicknav.js}"></script>
-    <script th:src="@{js/mixitup.min.js}"></script>
-    <script th:src="@{js/owl.carousel.min.js}"></script>
-    <script th:src="@{js/main.js}"></script>
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/js/mixitup.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 
 </th:block>
 </body>

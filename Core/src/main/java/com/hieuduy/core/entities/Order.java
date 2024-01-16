@@ -20,8 +20,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
-    private Date orderDate;
-    private String orderStatus;
+    private String fullName;
+    private String contactNumber;
+
+    private Date date;
+    private String status;
     private String note;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
