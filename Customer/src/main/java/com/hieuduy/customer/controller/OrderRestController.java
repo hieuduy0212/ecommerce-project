@@ -1,4 +1,4 @@
 package com.hieuduy.customer.controller;
 
-public class OrderController {
+public class OrderRestController {
 }

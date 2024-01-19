@@ -36,7 +36,7 @@ public class ShoppingCart {
         float ret = 0f;
         for (CartItem ci : cartItems) {
             if (ci.getProduct().getSale() > 0f) {
-                ret += ci.getQuantity() * ci.getProduct().getSale();
+                ret += ci.getQuantity() * ci.getProduct().getSalePrice();
             } else {
                 ret += ci.getQuantity() * ci.getProduct().getPrice();
             }

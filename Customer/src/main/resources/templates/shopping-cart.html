@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments.html::head}"></head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<th:block th:replace="~{fragments.html::humberger}"></th:block>
+
+<th:block th:replace="~{fragments.html::header}"></th:block>
+
+<th:block th:replace="~{fragments.html::hero}"></th:block>
+
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+                    <table id="cartItemsTable">
+                        <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" onclick="checkAllItems(this)">
+                            </th>
+                            <th class="shoping__product">Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${cart.cartItems}"  th:id="'cart-item-' + ${item.id}">
+                            <td>
+                                <input type="checkbox" th:value="${item.product.id}">
+                            </td>
+                            <td class="shoping__cart__item">
+                                <a th:href="@{'/product/' + ${item.product.id}}">
+                                    <img
+                                            style="width: 10rem"
+                                            th:src="'data:' + ${item.product.images[0].type} + ';base64,' + ${imgUtil.picByteToString(item.product.images[0].picByte)}"
+                                            alt="">
+                                    <h5 th:text="${item.product.name}"></h5>
+                                </a>
+                            </td>
+                            <td class="shoping__cart__price" th:unless="${item.product.sale > 0}" th:text="${'$' + item.product.price}"></td>
+                            <td class="shoping__cart__price" th:if="${item.product.sale > 0}" th:text="${'$' + item.product.salePrice}"></td>
+                            <td class="shoping__cart__quantity">
+                                <div class="quantity">
+                                    <input type="text" th:value="${item.quantity}" th:onchange="'updateCartItem(this,' + ${item.id} + ')'">
+                                </div>
+                            </td>
+                            <td class=" shoping__cart__total">$<span th:text="${item.totalPrice}" class="total-value" ></span></td>
+                            <td class="shoping__cart__item__close">
+                                <span class="icon_close"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    <a th:href="@{/home}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__checkout">
+                    <h5>Cart Total</h5>
+                    <ul>
+                        <li>Total <span class="total-cart-value" th:text="${'$' + cart.totalPrice}" >$0.0</span></li>
+                    </ul>
+                    <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shoping Cart Section End -->
+
+<!-- Js Plugins -->
+<th:block th:replace="~{fragments.html::js}"></th:block>
+<script type="text/javascript" th:src="@{/js/myjs/cart.js}"></script>
+
+
+
+</body>
+
+</html>

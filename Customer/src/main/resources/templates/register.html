@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments.html::head}"></head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<th:block th:replace="~{fragments.html::humberger}"></th:block>
+
+<th:block th:replace="~{fragments.html::header}"></th:block>
+
+<th:block th:replace="~{fragments.html::hero}"></th:block>
+
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1 col-md-2"></div>
+            <div class="col-lg-10 col-md-8">
+
+                <div class="alert alert-danger alert-dismissible" role="alert" th:if="${errorMessage}" th:text="${errorMessage}">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-success alert-dismissible" role="alert" th:if="${successMessage}" th:text="${successMessage}">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <form method="post" th:action="@{/register}" th:object="${customerDto}">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" id="firstName"
+                                   th:field="*{firstName}"
+                                   placeholder="Enter first name" autofocus>
+                            <p style="color: red;font-style: italic" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="lastName">Last name</label>
+                            <input type="text" class="form-control" id="lastName"
+                                   th:field="*{lastName}"
+                                   placeholder="Enter last name">
+                            <p style="color: red;font-style: italic" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username"
+                               th:field="*{username}"
+                               placeholder="Enter username">
+                        <p style="color: red;font-style: italic" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password"
+                                   th:field="*{password}"
+                                   placeholder="Password">
+                            <p style="color: red;font-style: italic" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="repeat-password">Repeat password</label>
+                            <input type="password" class="form-control" id="repeat-password"
+                                   th:field="*{repeatPassword}"
+                                   placeholder="Password">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary site-btn">Register</button>
+                </form>
+                <p class="text-center">
+                    <span>Already have an account?</span>
+                    <a th:href="@{/login}">
+                        <span>Sign in instead</span>
+                    </a>
+                </p>
+            </div>
+            <div class="col-lg-1 col-md-2"></div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Js Plugins -->
+<th:block th:replace="~{fragments.html::js}"></th:block>
+
+
+
+</body>
+
+</html>

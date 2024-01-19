@@ -6,7 +6,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -34,19 +33,22 @@ public class CustomerSecurityConfig {
         authenticationManagerBuilder.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
-
+        String[] resource = {"/css/**", "/fonts/**", "/img/**", "/js/**", "/sass/**"};
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authenticationManager(authenticationManager)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/cart/**", "/order/**").hasAuthority("CUSTOMER")
+                        .requestMatchers("/home", "/products", "/product/{productId}", "/register", "/get-size-and-price").permitAll()
+                        .requestMatchers(resource).permitAll()
+
                 )
                 .formLogin(login -> login
                         .loginPage("/login")
                         .loginProcessingUrl("/do-login")
                         .failureUrl("/login?error")
-                        .defaultSuccessUrl("/index", true)
+                        .defaultSuccessUrl("/home", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -63,9 +65,4 @@ public class CustomerSecurityConfig {
     }
 
 
-    @Bean
-    public WebSecurityCustomizer ignoringCustomizer(){
-        String[] resource = {"/css/**", "/fonts/**", "/img/**", "/js/**", "/sass/**"};
-        return (web) -> web.ignoring().requestMatchers(resource);
-    }
 }

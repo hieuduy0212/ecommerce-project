@@ -57,11 +57,11 @@
           <div class="product__details__quantity">
             <div class="quantity">
               <div class="pro-qty">
-                <input type="text" value="1">
+                <input type="text" value="1" id="quantity">
               </div>
             </div>
           </div>
-          <a href="#" class="primary-btn">ADD TO CARD</a>
+          <a href="#" th:onclick="'addToCart(' + ${product.id} + ',-1);event.preventDefault();'" class="primary-btn">ADD TO CARD</a>
           <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
           <ul>
             <li><b>Availability</b> <span th:text="${product.currentQuantity}"></span></li>
@@ -155,6 +155,7 @@
 
 <!-- Js Plugins -->
 <th:block th:replace="~{fragments.html::js}"></th:block>
+<script type="text/javascript" th:src="@{/js/myjs/cart.js}"></script>
 
 
 

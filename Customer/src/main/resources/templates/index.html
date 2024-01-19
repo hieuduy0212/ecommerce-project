@@ -93,7 +93,7 @@
                   <div class="product__discount__percent" th:if="${product.sale > 0}" th:text="${'-' + product.sale + '%'}"></div>
                   <ul class="product__item__pic__hover">
                     <li><a th:href="@{'/product/' + ${product.id}}"><i class="fa fa-eye"></i></a></li>
-                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a href="#" th:onclick="'addToCart(' + ${product.id} + ',1);event.preventDefault();'"><i class="fa fa-shopping-cart"></i></a></li>
                   </ul>
                 </div>
                 <div class="product__discount__item__text">
@@ -123,7 +123,7 @@
 
 <!-- Js Plugins -->
 <th:block th:replace="~{fragments.html::js}"></th:block>
-
+<script type="text/javascript" th:src="@{/js/myjs/cart.js}"></script>
 
 
 </body>

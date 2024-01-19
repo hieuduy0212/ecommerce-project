@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments.html::head}"></head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<th:block th:replace="~{fragments.html::humberger}"></th:block>
+
+<th:block th:replace="~{fragments.html::header}"></th:block>
+
+<th:block th:replace="~{fragments.html::hero}"></th:block>
+
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1 col-md-2"></div>
+            <div class="col-lg-10 col-md-8">
+
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"  th:if="${param.error}">
+                    Incorrect username or password!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"   th:if="${param.logout}">
+                    You have been logged out!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form method="post" th:action="@{/do-login}">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary site-btn">Login</button>
+                </form>
+                <p class="text-center">
+                    <span>New on our platform?</span>
+                    <a th:href="@{/register}">
+                        <span>Create an account</span>
+                    </a>
+                </p>
+            </div>
+            <div class="col-lg-1 col-md-2"></div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Js Plugins -->
+<th:block th:replace="~{fragments.html::js}"></th:block>
+
+
+
+</body>
+
+</html>
