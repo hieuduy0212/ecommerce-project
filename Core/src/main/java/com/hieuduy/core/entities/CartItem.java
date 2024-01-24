@@ -27,9 +27,9 @@ public class CartItem {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", foreignKey = @ForeignKey(name = "fk_cart_item_product_id"))
-    @ToString.Exclude
+//    @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JsonIgnore
+//    @JsonIgnore
     private Product product;
 
     public float getTotalPrice(){

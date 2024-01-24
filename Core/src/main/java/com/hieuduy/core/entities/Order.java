@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +23,9 @@ public class Order {
     private Long id;
     private String fullName;
     private String contactNumber;
+    private String address;
 
-    private Date date;
+    private LocalDateTime date;
     private String status;
     private String note;
 

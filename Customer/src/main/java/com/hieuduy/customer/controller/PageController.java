@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -37,13 +38,19 @@ public class PageController {
     }
 
     @GetMapping("/products")
-    public String goProductsPage(Model model) {
+    public String goProductsPage(Model model, @RequestParam(value = "category_id", required = false) Long categoryId) {
+        if(categoryId == null){
+            List<Product> products = productService.findAll();
+            model.addAttribute("products", products);
+        }else{
+            List<Product> products = productService.findAllByCategoryId(categoryId);
+            model.addAttribute("products", products);
+        }
 
-        List<Product> products = productService.findAll();
         List<Category> categories = categoryService.findAll();
 
         model.addAttribute("title", "Home page");
-        model.addAttribute("products", products);
+
         model.addAttribute("categories", categories);
         model.addAttribute("imgUtil", new ImageUtil());
 

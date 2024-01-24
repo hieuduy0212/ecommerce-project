@@ -18,15 +18,20 @@
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
     <div class="container">
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert"  th:if="${param.order}">
+            Order successfully!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
                     <table id="cartItemsTable">
                         <thead>
                         <tr>
-                            <th>
-                                <input type="checkbox" onclick="checkAllItems(this)">
-                            </th>
                             <th class="shoping__product">Products</th>
                             <th>Price</th>
                             <th>Quantity</th>
@@ -36,9 +41,6 @@
                         </thead>
                         <tbody>
                         <tr th:each="item : ${cart.cartItems}"  th:id="'cart-item-' + ${item.id}">
-                            <td>
-                                <input type="checkbox" th:value="${item.product.id}">
-                            </td>
                             <td class="shoping__cart__item">
                                 <a th:href="@{'/product/' + ${item.product.id}}">
                                     <img
@@ -79,7 +81,9 @@
                     <ul>
                         <li>Total <span class="total-cart-value" th:text="${'$' + cart.totalPrice}" >$0.0</span></li>
                     </ul>
-                    <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    <a th:href="@{/order}"
+                       th:style="${#lists.size(cart.cartItems) == 0} ? 'pointer-events: none' : ''"
+                       class="primary-btn">PROCEED TO CHECKOUT</a>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +46,8 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                <a th:href="@{/login}" sec:authorize="isAnonymous()"><i class="fa fa-user"></i> Login</a>
+                <a th:href="@{/logout}" sec:authorize="isAuthenticated()"><i class="fa fa-user"></i> Logout</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -114,7 +116,8 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a th:href="@{/login}" sec:authorize="isAnonymous()"><i class="fa fa-user"></i> Login</a>
+                                <a th:href="@{/logout}" sec:authorize="isAuthenticated()"><i class="fa fa-user"></i> Logout</a>
                             </div>
                         </div>
                     </div>
@@ -168,7 +171,7 @@
                         </div>
                         <ul>
                             <li th:each="category : ${categories}">
-                                <a href="#" th:text="${category.name}">Fresh Meat</a>
+                                <a th:href="@{'/products?category_id=' + ${category.id} }" th:text="${category.name}"></a>
                             </li>
                         </ul>
                     </div>
